@@ -20,9 +20,12 @@ You need:
 | 19      | MOSI, GPIO 10 (Output)  | 6         | MOSI         |
 | 20      | GND                     | 1         | GND          |
 | 21      | MISO, GPIO 9 (Input)    | 7         | MISO         |
-| 22      | GPIO 25 (Input)         | 8         | IRQ          |
+| (22)    | GPIO 25 (Input)         | (8)       | IRQ          |
 | 23      | SCLK, GPIO 11 (Output)  | 5         | SCLK         |
 | 24      | CS0, GPIO 8 (Output)    | 4         | CSN          |
+
+- connection from Raspberry PI pin 22 to nRF24L01+ IRQ pin 8 is optional
+- nRF24L01+ CE pin 3 can be connected to an other Raspberry PI GPIO pin 
 
 ## Python software modules
 
