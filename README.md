@@ -24,7 +24,7 @@ You need:
 | 23      | SCLK, GPIO 11 (Output)  | 5         | SCLK         |
 | 24      | CS0, GPIO 8 (Output)    | 4         | CSN          |
 
-- connection from Raspberry PI pin 22 to nRF24L01+ IRQ pin 8 is optional
+- connection from Raspberry PI pin 22 to nRF24L01+ IRQ pin 8 is not necessary
 - nRF24L01+ CE pin 3 can be connected to an other Raspberry PI GPIO pin 
 
 ## Python software modules
@@ -38,6 +38,7 @@ python -m pip install pyrf24
 
 ## Usage
 
+```python
 from HoymilesHmDtu import HoymilesHmDtu
 
 CSn = 0
@@ -50,4 +51,6 @@ success, info = hm.QueryInverterInfo()
 
 print(f"success: {success}")
 HoymilesHmDtu.PrintInverterInfo(info)
+```
+
 
