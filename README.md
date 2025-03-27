@@ -13,17 +13,17 @@ You need:
 
 ## Pin connections
 
-Raspberry PI                    | nRF24 
-Pin | Signal                    | Pin | Signal
-----+---------------------------+-----+--------------
-17  | +3.3V                     | 2   | +3.3V
-18  | GPIO 24 (Output)          | 3   | CE (Input)
-19  | MOSI, GPIO 10 (Output)    | 6   | MOSI
-20  | GND                       | 1   | GND
-21  | MISO, GPIO 9 (Input)      | 7   | MISO
-22  | GPIO 25 (Input)           | 8   | IRQ
-23  | SCLK, GPIO 11 (Output)    | 5   | SCLK
-24  | CS0, GPIO 8 (Output)      | 4   | CSN
+| Raspberry PI                    | nRF24            |
+| Pin | Signal                    | Pin | Signal     |
+| --- | ------------------------- | --- | ---------- |
+| 17  | +3.3V                     | 2   | +3.3V      |
+| 18  | GPIO 24 (Output)          | 3   | CE (Input) |
+| 19  | MOSI, GPIO 10 (Output)    | 6   | MOSI       |
+| 20  | GND                       | 1   | GND        |
+| 21  | MISO, GPIO 9 (Input)      | 7   | MISO       |
+| 22  | GPIO 25 (Input)           | 8   | IRQ        |
+| 23  | SCLK, GPIO 11 (Output)    | 5   | SCLK       |
+| 24  | CS0, GPIO 8 (Output)      | 4   | CSN        |
 
 ## Python software modules
 
