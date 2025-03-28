@@ -818,7 +818,7 @@ class HoymilesHmDtu:
 
     @staticmethod
     def __GetUInt16(data : bytes | bytearray, position : int) -> int:
-        """ Extracts an 16-bit unsigned integer from data.
+        """ Extracts a 16-bit unsigned integer from data.
 
         Args:
             data (bytes | bytearray): The raw data.
@@ -831,7 +831,7 @@ class HoymilesHmDtu:
     
     @staticmethod
     def __GetUInt32(data : bytes | bytearray, position : int) -> int:
-        """ Extracts an 32-bit unsigned integer from data.
+        """ Extracts a 32-bit unsigned integer from data.
 
         Args:
             data (bytes | bytearray): The raw data.
