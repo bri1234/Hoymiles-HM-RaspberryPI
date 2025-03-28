@@ -78,9 +78,6 @@ class HoymilesHmDtu:
     # the power level to send the request to the receiver
     __RADIO_POWER_LEVEL = nrf.rf24_pa_dbm_e.RF24_PA_MAX
 
-    # time (in s) to wait before a new request is sent to the inverter if the previous request was not received
-    __WAIT_BEFORE_RETRY_S = 3
-
     # maximum size of packets that can be sent with the nRF24L01 module
     __MAX_PACKET_SIZE = 32
 
@@ -161,7 +158,7 @@ class HoymilesHmDtu:
 
         self.__radio = radio
 
-    def QueryInverterInfo(self, numberOfRetries : int = 20) -> tuple[bool, dict[str, float | list[dict[str, float]]]]:
+    def QueryInverterInfo(self, numberOfRetries : int = 20, waitBeforeRetry : float = 1.0) -> tuple[bool, dict[str, float | list[dict[str, float]]]]:
         """ Requests info data from the inverter and returns the inverter response.
 
             Info example (2 channels):
@@ -194,6 +191,7 @@ class HoymilesHmDtu:
 
         Args:
             numberOfRetries (int): Number of requests before giving up.
+            waitBeforeRetry (float): Time (in s) to wait before a new request is sent to the inverter if the previous request was not successful.
 
         Returns:
             bool: Success (True or False)
@@ -215,7 +213,7 @@ class HoymilesHmDtu:
             for retryIndex in range(numberOfRetries):
 
                 if retryIndex > 0:
-                    time.sleep(HoymilesHmDtu.__WAIT_BEFORE_RETRY_S)
+                    time.sleep(waitBeforeRetry)
 
                 # select a random channel for the request
                 txChannelIndex = random.randint(0, len(HoymilesHmDtu.__TX_CHANNELS) - 1)
@@ -840,4 +838,4 @@ class HoymilesHmDtu:
         Returns:
             int: The integer.
         """
-        return int.from_bytes(data[position:position + 2], byteorder="big", signed=False)
+        return int.from_bytes(data[position:position + 4], byteorder="big", signed=False)
