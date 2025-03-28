@@ -366,23 +366,23 @@ class HoymilesHmDtu:
         
         channel1 : dict[str, float] = {}
 
-        channel1["DC V"] = int.from_bytes(responseData[2:4], "big") / 10.0           # V
-        channel1["DC I"] = int.from_bytes(responseData[4:6], "big") / 100.0          # A
-        channel1["DC P"] = int.from_bytes(responseData[6:8], "big") / 10.0           # W
-        channel1["DC E total"] = int.from_bytes(responseData[8:12], "big") / 1000.0  # kWh
-        channel1["DC E day"] = int.from_bytes(responseData[12:14], "big") / 1.0      # Wh
+        channel1["DC V"]       = HoymilesHmDtu.__GetUInt16(responseData,  2) / 10.0     # V
+        channel1["DC I"]       = HoymilesHmDtu.__GetUInt16(responseData,  4) / 100.0    # A
+        channel1["DC P"]       = HoymilesHmDtu.__GetUInt16(responseData,  6) / 10.0     # W
+        channel1["DC E total"] = HoymilesHmDtu.__GetUInt32(responseData,  8) / 1000.0   # kWh
+        channel1["DC E day"]   = HoymilesHmDtu.__GetUInt16(responseData, 12) / 1.0      # Wh
 
         info : dict[str, float | list[dict[str, float]]] = {}
         info["Channels"] = [channel1]
 
-        info["AC V"] = int.from_bytes(responseData[14:16], "big") / 10.0         # V
-        info["AC F"] = int.from_bytes(responseData[16:18], "big") / 100.0        # Hz
-        info["AC P"] = int.from_bytes(responseData[18:20], "big") / 10.0         # W
-        info["AC Q"] = int.from_bytes(responseData[20:22], "big") / 10.0         # VAR (W) reactive power
-        info["AC I"] = int.from_bytes(responseData[22:24], "big") / 100.0        # A
-        info["AC PF"] = int.from_bytes(responseData[24:26], "big") / 1000.0      # -
-        info["T"] = int.from_bytes(responseData[26:28], "big") / 10.0            # °C
-        info["EVT"] = int.from_bytes(responseData[28:30], "big") / 1.0           # -
+        info["AC V"]  = HoymilesHmDtu.__GetUInt16(responseData, 14) / 10.0      # V
+        info["AC F"]  = HoymilesHmDtu.__GetUInt16(responseData, 16) / 100.0     # Hz
+        info["AC P"]  = HoymilesHmDtu.__GetUInt16(responseData, 18) / 10.0      # W
+        info["AC Q"]  = HoymilesHmDtu.__GetUInt16(responseData, 20) / 10.0      # VAR (W) reactive power
+        info["AC I"]  = HoymilesHmDtu.__GetUInt16(responseData, 22) / 100.0     # A
+        info["AC PF"] = HoymilesHmDtu.__GetUInt16(responseData, 24) / 1000.0    # -
+        info["T"]     = HoymilesHmDtu.__GetUInt16(responseData, 26) / 10.0      # °C
+        info["EVT"]   = HoymilesHmDtu.__GetUInt16(responseData, 28) / 1.0       # -
 
         return info
 
@@ -399,31 +399,31 @@ class HoymilesHmDtu:
         
         channel1 : dict[str, float] = {}
 
-        channel1["DC V"] = int.from_bytes(responseData[2:4], "big") / 10.0           # V
-        channel1["DC I"] = int.from_bytes(responseData[4:6], "big") / 100.0          # A
-        channel1["DC P"] = int.from_bytes(responseData[6:8], "big") / 10.0           # W
-        channel1["DC E total"] = int.from_bytes(responseData[14:18], "big") / 1000.0 # kWh
-        channel1["DC E day"] = int.from_bytes(responseData[22:24], "big") / 1.0      # Wh
+        channel1["DC V"]       = HoymilesHmDtu.__GetUInt16(responseData,  2) / 10.0     # V
+        channel1["DC I"]       = HoymilesHmDtu.__GetUInt16(responseData,  4) / 100.0    # A
+        channel1["DC P"]       = HoymilesHmDtu.__GetUInt16(responseData,  6) / 10.0     # W
+        channel1["DC E total"] = HoymilesHmDtu.__GetUInt32(responseData, 14) / 1000.0   # kWh
+        channel1["DC E day"]   = HoymilesHmDtu.__GetUInt16(responseData, 22) / 1.0      # Wh
 
         channel2 : dict[str, float] = {}
 
-        channel2["DC V"] = int.from_bytes(responseData[8:10], "big") / 10.0          # V
-        channel2["DC I"] = int.from_bytes(responseData[10:12], "big") / 100.0        # A
-        channel2["DC P"] = int.from_bytes(responseData[12:14], "big") / 10.0         # W
-        channel2["DC E total"] = int.from_bytes(responseData[18:22], "big") / 1000.0 # kWh
-        channel2["DC E day"] = int.from_bytes(responseData[24:26], "big") / 1.0      # Wh
+        channel2["DC V"]       = HoymilesHmDtu.__GetUInt16(responseData,  8) / 10.0     # V
+        channel2["DC I"]       = HoymilesHmDtu.__GetUInt16(responseData, 10) / 100.0    # A
+        channel2["DC P"]       = HoymilesHmDtu.__GetUInt16(responseData, 12) / 10.0     # W
+        channel2["DC E total"] = HoymilesHmDtu.__GetUInt32(responseData, 18) / 1000.0   # kWh
+        channel2["DC E day"]   = HoymilesHmDtu.__GetUInt16(responseData, 24) / 1.0      # Wh
 
         info : dict[str, float | list[dict[str, float]]] = {}
         info["Channels"] = [channel1, channel2]
 
-        info["AC V"] = int.from_bytes(responseData[26:28], "big") / 10.0         # V
-        info["AC F"] = int.from_bytes(responseData[28:30], "big") / 100.0        # Hz
-        info["AC P"] = int.from_bytes(responseData[30:32], "big") / 10.0         # W
-        info["AC Q"] = int.from_bytes(responseData[32:34], "big") / 10.0         # VAR (W) reactive power
-        info["AC I"] = int.from_bytes(responseData[34:36], "big") / 100.0        # A
-        info["AC PF"] = int.from_bytes(responseData[36:38], "big") / 1000.0      # -
-        info["T"] = int.from_bytes(responseData[38:40], "big") / 10.0            # °C
-        info["EVT"] = int.from_bytes(responseData[40:42], "big") / 1.0           # -
+        info["AC V"]  = HoymilesHmDtu.__GetUInt16(responseData, 26) / 10.0       # V
+        info["AC F"]  = HoymilesHmDtu.__GetUInt16(responseData, 28) / 100.0      # Hz
+        info["AC P"]  = HoymilesHmDtu.__GetUInt16(responseData, 30) / 10.0       # W
+        info["AC Q"]  = HoymilesHmDtu.__GetUInt16(responseData, 32) / 10.0       # VAR (W) reactive power
+        info["AC I"]  = HoymilesHmDtu.__GetUInt16(responseData, 34) / 100.0      # A
+        info["AC PF"] = HoymilesHmDtu.__GetUInt16(responseData, 36) / 1000.0     # -
+        info["T"]     = HoymilesHmDtu.__GetUInt16(responseData, 38) / 10.0       # °C
+        info["EVT"]   = HoymilesHmDtu.__GetUInt16(responseData, 40) / 1.0        # -
 
         return info
 
@@ -440,47 +440,47 @@ class HoymilesHmDtu:
 
         channel1 : dict[str, float] = {}
 
-        channel1["DC V"] = int.from_bytes(responseData[2:4], "big") / 10.0           # V
-        channel1["DC I"] = int.from_bytes(responseData[4:6], "big") / 100.0          # A
-        channel1["DC P"] = int.from_bytes(responseData[8:10], "big") / 10.0          # W
-        channel1["DC E total"] = int.from_bytes(responseData[12:16], "big") / 1000.0 # kWh
-        channel1["DC E day"] = int.from_bytes(responseData[20:22], "big") / 1.0      # Wh
+        channel1["DC V"]       = HoymilesHmDtu.__GetUInt16(responseData,  2) / 10.0     # V
+        channel1["DC I"]       = HoymilesHmDtu.__GetUInt16(responseData,  4) / 100.0    # A
+        channel1["DC P"]       = HoymilesHmDtu.__GetUInt16(responseData,  8) / 10.0     # W
+        channel1["DC E total"] = HoymilesHmDtu.__GetUInt32(responseData, 12) / 1000.0   # kWh
+        channel1["DC E day"]   = HoymilesHmDtu.__GetUInt16(responseData, 20) / 1.0      # Wh
 
         channel2 : dict[str, float] = {}
 
-        channel2["DC V"] = int.from_bytes(responseData[2:4], "big") / 10.0           # V
-        channel2["DC I"] = int.from_bytes(responseData[6:8], "big") / 100.0          # A
-        channel2["DC P"] = int.from_bytes(responseData[10:12], "big") / 10.0         # W
-        channel2["DC E total"] = int.from_bytes(responseData[16:20], "big") / 1000.0 # kWh
-        channel2["DC E day"] = int.from_bytes(responseData[22:24], "big") / 1.0      # Wh
+        channel2["DC V"]       = HoymilesHmDtu.__GetUInt16(responseData,  2) / 10.0     # V
+        channel2["DC I"]       = HoymilesHmDtu.__GetUInt16(responseData,  6) / 100.0    # A
+        channel2["DC P"]       = HoymilesHmDtu.__GetUInt16(responseData, 10) / 10.0     # W
+        channel2["DC E total"] = HoymilesHmDtu.__GetUInt32(responseData, 16) / 1000.0   # kWh
+        channel2["DC E day"]   = HoymilesHmDtu.__GetUInt16(responseData, 22) / 1.0      # Wh
 
         channel3 : dict[str, float] = {}
 
-        channel3["DC V"] = int.from_bytes(responseData[24:26], "big") / 10.0         # V
-        channel3["DC I"] = int.from_bytes(responseData[26:28], "big") / 100.0        # A
-        channel3["DC P"] = int.from_bytes(responseData[30:32], "big") / 10.0         # W
-        channel3["DC E total"] = int.from_bytes(responseData[34:38], "big") / 1000.0 # kWh
-        channel3["DC E day"] = int.from_bytes(responseData[42:44], "big") / 1.0      # Wh
+        channel3["DC V"]       = HoymilesHmDtu.__GetUInt16(responseData, 24) / 10.0     # V
+        channel3["DC I"]       = HoymilesHmDtu.__GetUInt16(responseData, 26) / 100.0    # A
+        channel3["DC P"]       = HoymilesHmDtu.__GetUInt16(responseData, 30) / 10.0     # W
+        channel3["DC E total"] = HoymilesHmDtu.__GetUInt32(responseData, 34) / 1000.0   # kWh
+        channel3["DC E day"]   = HoymilesHmDtu.__GetUInt16(responseData, 42) / 1.0      # Wh
 
         channel4 : dict[str, float] = {}
 
-        channel4["DC V"] = int.from_bytes(responseData[24:26], "big") / 10.0         # V
-        channel4["DC I"] = int.from_bytes(responseData[28:30], "big") / 100.0        # A
-        channel4["DC P"] = int.from_bytes(responseData[32:34], "big") / 10.0         # W
-        channel4["DC E total"] = int.from_bytes(responseData[38:42], "big") / 1000.0 # kWh
-        channel4["DC E day"] = int.from_bytes(responseData[44:46], "big") / 1.0      # Wh
+        channel4["DC V"]       = HoymilesHmDtu.__GetUInt16(responseData, 24) / 10.0     # V
+        channel4["DC I"]       = HoymilesHmDtu.__GetUInt16(responseData, 28) / 100.0    # A
+        channel4["DC P"]       = HoymilesHmDtu.__GetUInt16(responseData, 32) / 10.0     # W
+        channel4["DC E total"] = HoymilesHmDtu.__GetUInt32(responseData, 38) / 1000.0   # kWh
+        channel4["DC E day"]   = HoymilesHmDtu.__GetUInt16(responseData, 44) / 1.0      # Wh
 
         info : dict[str, float | list[dict[str, float]]] = {}
         info["Channels"] = [channel1, channel2, channel3, channel4]
 
-        info["AC V"] = int.from_bytes(responseData[46:48], "big") / 10.0         # V
-        info["AC F"] = int.from_bytes(responseData[48:50], "big") / 100.0        # Hz
-        info["AC P"] = int.from_bytes(responseData[50:52], "big") / 10.0         # W
-        info["AC Q"] = int.from_bytes(responseData[52:54], "big") / 10.0         # VAR (W) reactive power
-        info["AC I"] = int.from_bytes(responseData[54:56], "big") / 100.0        # A
-        info["AC PF"] = int.from_bytes(responseData[56:58], "big") / 1000.0      # -
-        info["T"] = int.from_bytes(responseData[58:60], "big") / 10.0            # °C
-        info["EVT"] = int.from_bytes(responseData[60:62], "big") / 1.0           # -
+        info["AC V"]  = HoymilesHmDtu.__GetUInt16(responseData, 46) / 10.0      # V
+        info["AC F"]  = HoymilesHmDtu.__GetUInt16(responseData, 48) / 100.0     # Hz
+        info["AC P"]  = HoymilesHmDtu.__GetUInt16(responseData, 50) / 10.0      # W
+        info["AC Q"]  = HoymilesHmDtu.__GetUInt16(responseData, 52) / 10.0      # VAR (W) reactive power
+        info["AC I"]  = HoymilesHmDtu.__GetUInt16(responseData, 54) / 100.0     # A
+        info["AC PF"] = HoymilesHmDtu.__GetUInt16(responseData, 56) / 1000.0    # -
+        info["T"]     = HoymilesHmDtu.__GetUInt16(responseData, 58) / 10.0      # °C
+        info["EVT"]   = HoymilesHmDtu.__GetUInt16(responseData, 60) / 1.0       # -
 
         return info
 
@@ -816,16 +816,28 @@ class HoymilesHmDtu:
 
         return crc
 
-###################################################################################################
-# functions for debugging
-###################################################################################################
+    @staticmethod
+    def __GetUInt16(data : bytes | bytearray, position : int) -> int:
+        """ Extracts an 16-bit unsigned integer from data.
 
-if __name__ == "__main__":
+        Args:
+            data (bytes | bytearray): The raw data.
+            position (int): The position where the integer is located in the data.
 
-    hm = HoymilesHmDtu("114184020874", 0, 24)
-    hm.InitializeCommunication()
-    success, info = hm.QueryInverterInfo()
+        Returns:
+            int: The integer.
+        """
+        return int.from_bytes(data[position:position + 2], byteorder="big", signed=False)
+    
+    @staticmethod
+    def __GetUInt32(data : bytes | bytearray, position : int) -> int:
+        """ Extracts an 32-bit unsigned integer from data.
 
-    print(f"success: {success}")
-    HoymilesHmDtu.PrintInverterInfo(info)
+        Args:
+            data (bytes | bytearray): The raw data.
+            position (int): The position where the integer is located in the data.
 
+        Returns:
+            int: The integer.
+        """
+        return int.from_bytes(data[position:position + 2], byteorder="big", signed=False)
